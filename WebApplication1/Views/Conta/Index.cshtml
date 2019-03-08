@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Minhas Contas</h2>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>id</td>
+            <td>Nome</td>
+            <td>Saldo</td>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @{
+            foreach (var item in (List<ContaModel>)ViewBag.ListaContas)
+            {
+                <tr>
+                    <td>
+                        <button type="button" class="btn btn-danger">Excluir</button>
+                    </td>
+                    <td>@item.id.ToString()</td>
+                    <td>@item.Nome.ToString()</td>
+                    <td>R$ @item.Saldo.ToString()</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+
+</table>
+

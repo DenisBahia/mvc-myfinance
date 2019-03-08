@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebApplication1</title>
+    <title>@ViewData["Title"] - MVC MyFinance</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
-<body>
+<body onload="buscarUsuarioLogado()">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -26,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">WebApplication1</a>
+                <a asp-area="" asp-controller="Home" asp-action="Menu" class="navbar-brand">MVC MyFinance</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -34,17 +34,22 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
+                @using Microsoft.AspNetCore.Http;
+                @inject IHttpContextAccessor HttpContextAccessor;
+                <div style="color: #fff; text-align:right; height: 50px; padding-top: 13px;">
+                    <div id="NomeUsuarioLogado" />
+                </div>
             </div>
         </div>
     </nav>
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
+    <div class="container body-content" style="padding-top:25px;">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - WebApplication1</p>
+            <p>&copy; 2019 - MVC MyFinance</p>
         </footer>
     </div>
 
@@ -71,4 +76,13 @@
 
     @RenderSection("Scripts", required: false)
 </body>
+<script>
+    function buscarUsuarioLogado() {
+        var nome = '@HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")'
+        if (nome != "") {
+            var div = document.getElementById("NomeUsuarioLogado")
+            div.innerHTML = 'Olá ' + nome + '<a href="../Usuario/Login/0">(Sair)</a>'
+        }
+    }
+</script>
 </html>

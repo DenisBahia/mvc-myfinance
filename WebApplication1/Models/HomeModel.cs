@@ -9,11 +9,5 @@ namespace WebApplication1.Models
 {
     public class HomeModel
     {
-        public string LerPlanoConta()
-        {
-            DAL objDAL = new DAL();
-            DataTable dt = objDAL.RetDataTable("select * from plano_contas");
-            return dt.Rows[0][0].ToString();
-        }
     }
 }
