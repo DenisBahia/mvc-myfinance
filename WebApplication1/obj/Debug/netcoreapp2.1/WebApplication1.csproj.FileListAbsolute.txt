@@ -72,3 +72,8 @@ C:\Users\denis.bahia\Desktop\Curso WEB\mvc-myfinance\WebApplication1\obj\Debug\n
 C:\Users\denis.bahia\Desktop\Curso WEB\mvc-myfinance\WebApplication1\obj\Debug\netcoreapp2.1\Razor\Views\Transacao\Extrato.g.cshtml.cs
 C:\Users\denis.bahia\Desktop\Curso WEB\mvc-myfinance\WebApplication1\obj\Debug\netcoreapp2.1\Razor\Views\Transacao\Dashboard.g.cshtml.cs
 C:\Users\denis.bahia\Desktop\Curso WEB\mvc-myfinance\WebApplication1\obj\Debug\netcoreapp2.1\Razor\Views\Home\Ajuda.g.cshtml.cs
+C:\Users\denis.bahia\Desktop\Curso WEB\mvc-myfinance\WebApplication1\obj\Debug\netcoreapp2.1\Razor\Views\Conta\CriarConta.g.cshtml.cs
+C:\Users\denis.bahia\Desktop\Curso WEB\mvc-myfinance\WebApplication1\obj\Debug\netcoreapp2.1\Razor\Views\PlanoConta\CriarPlanoConta.g.cshtml.cs
+C:\Users\denis.bahia\Desktop\Curso WEB\mvc-myfinance\WebApplication1\obj\Debug\netcoreapp2.1\Razor\Views\Transacao\Registrar.g.cshtml.cs
+C:\Users\denis.bahia\Desktop\Curso WEB\mvc-myfinance\WebApplication1\obj\Debug\netcoreapp2.1\Razor\Views\Transacao\ExcluirTransacao.g.cshtml.cs
+C:\Users\denis.bahia\Desktop\Curso WEB\mvc-myfinance\WebApplication1\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_LayoutLogin.g.cshtml.cs

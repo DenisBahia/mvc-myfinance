@@ -10,12 +10,12 @@ namespace WebApplication1.Util
     public class DAL
     {
 
-        private static string server = "localhost";
+        private static string server = "denisbahiaserver.mysql.database.azure.com";
         private static string database = "financeiro";
-        private static string user = "root";
-        private static string password = "";
-
-        private string connectionString = $"Server={server};database={database};uid={user};pwd={password}";
+        private static string user = "denis.bahia@denisbahiaserver";
+        private static string password = "dou85eki!@";
+        //Server=denisbahiaserver.mysql.database.azure.com; Port=3306; Database={your_database}; Uid=denis.bahia@denisbahiaserver; Pwd={your_password}; SslMode=Preferred;
+        private string connectionString = $"Server={server};database={database};uid={user};pwd={password};Allow Zero Datetime=true;SslMode=Preferred";
 
         private MySqlConnection connection;
 

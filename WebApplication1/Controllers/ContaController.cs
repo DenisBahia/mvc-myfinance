@@ -24,5 +24,32 @@ namespace WebApplication1.Controllers
             ViewBag.ListaContas = objConta.ListaConta();
             return View();
         }
+
+        [HttpPost]
+        public IActionResult CriarConta(ContaModel formulario)
+        {
+            if (ModelState.IsValid)
+            {
+                formulario.HttpContextAccessor = HttpContextAccessor;
+                formulario.Insert();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CriarConta()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ExcluirConta(int id)
+        {
+            ContaModel conta = new ContaModel(HttpContextAccessor);
+            conta.Delete(id);
+            return RedirectToAction("Index");
+        }
+
     }
 }

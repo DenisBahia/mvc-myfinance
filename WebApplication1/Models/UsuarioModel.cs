@@ -17,6 +17,8 @@ namespace WebApplication1.Models
         public String Nome { get; set; }
 
         [Required(ErrorMessage = "Preencha o Email!")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "O Email informado não é válido")]
         public String Email { get; set; }
 
         [Required(ErrorMessage = "Preencha a Senha!")]

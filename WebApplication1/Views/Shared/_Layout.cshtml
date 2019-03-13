@@ -28,11 +28,10 @@
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Menu" class="navbar-brand">MVC MyFinance</a>
             </div>
+
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Menu">Menu</a></li>
                 </ul>
                 @using Microsoft.AspNetCore.Http;
                 @inject IHttpContextAccessor HttpContextAccessor;
@@ -40,6 +39,7 @@
                     <div id="NomeUsuarioLogado" />
                 </div>
             </div>
+
         </div>
     </nav>
 
@@ -82,6 +82,8 @@
         if (nome != "") {
             var div = document.getElementById("NomeUsuarioLogado")
             div.innerHTML = 'Olá ' + nome + '<a href="../Usuario/Login/0">(Sair)</a>'
+        } else {
+            window.location.href = "../Usuario/Login";
         }
     }
 </script>

@@ -1,28 +1,32 @@
 ﻿@model UsuarioModel
 
-<h2>Registrar Minha Conta</h2>
-<br />
+@{ 
+    Layout = "../Shared/_LayoutLogin.cshtml";
+}
 
-<form asp-controller="Usuario" asp-action="Criar" method="post">
-    <div class="form-group">
-        <label for="email">Nome:</label>
-        <input type="text" class="form-control" id="name" asp-for="Nome">
-        <span asp-validation-for="Nome" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" asp-for="Email">
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="email">Data de Nascimento:</label>
-        <input type="date" class="form-control" id="nascimento" asp-for="Data_Nascimento">
-        <span asp-validation-for="Data_Nascimento" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="pwd">Password:</label>
-        <input type="password" class="form-control" id="pwd" asp-for="Senha">
-        <span asp-validation-for="Senha" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-block btn-success">Criar Conta</button>
-</form>
+<div class="container" style="background-color: rgba(239, 230, 230, .50); border-radius: 8px; padding: 20px; width: 500px;">
+    <form asp-controller="Usuario" asp-action="Criar" method="post">
+        <div class="form-group">
+            <label for="email">Nome:</label>
+            <input type="text" class="form-control" id="name" asp-for="Nome">
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" class="form-control" id="email" asp-for="Email">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="email">Data de Nascimento:</label>
+            <input type="date" class="form-control" id="nascimento" asp-for="Data_Nascimento">
+            <span asp-validation-for="Data_Nascimento" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" asp-for="Senha">
+            <span asp-validation-for="Senha" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Criar Conta</button>
+        <button type="button" class="btn btn-default" onclick="javascript:window.location.href='../Usuario/Login'">Login</button>
+    </form>
+</div>

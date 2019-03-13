@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,11 +12,15 @@ namespace WebApplication1.Models
     public class ContaModel
     {
         public int id { get; set; }
+
+        [Required(ErrorMessage = "Informe o nome da conta")]
         public String Nome { get; set; }
+        [Required(ErrorMessage = "Informe o saldo da conta")]
         public Double Saldo { get; set; }
+
         public int Usuario_Id { get; set; }
 
-        private IHttpContextAccessor HttpContextAccessor;
+        public IHttpContextAccessor HttpContextAccessor { get; set; }
 
         public ContaModel()
         {
@@ -51,5 +56,20 @@ namespace WebApplication1.Models
             return lista;
 
         }
+
+        public void Insert()
+        {
+            string strSQL = "insert conta (nome, saldo, usuario_id) values ('" + Nome + "', " + Saldo + ", " + HttpContextAccessor.HttpContext.Session.GetString("IdUsuarioLogado") + ")";
+            DAL oblDal = new DAL();
+            oblDal.ExecutarComandoSQL(strSQL);
+        }
+
+        public void Delete(int id)
+        {
+            string strSQL = "delete from conta where id = " + id;
+            DAL oblDal = new DAL();
+            oblDal.ExecutarComandoSQL(strSQL);
+        }
+
     }
 }

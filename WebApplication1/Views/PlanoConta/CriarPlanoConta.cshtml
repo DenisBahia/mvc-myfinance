@@ -1,0 +1,52 @@
+﻿@model PlanoContaModel
+
+@{
+    ViewData["Title"] = "CriarPlanoConta";
+}
+
+<h3>Criar Conta</h3>
+
+@{ 
+    var vDescricao = "";
+    var vTipo = "";
+    var labelSalvar = "Registrar";
+
+    try
+    {
+        vDescricao = @ViewBag.Registro.Descricao;
+        vTipo = @ViewBag.Registro.Tipo;
+        labelSalvar = "Atualizar";
+    }
+    catch
+    {
+
+    }
+
+}
+
+<form asp-controller="PlanoConta" asp-action="CriarPlanoConta">
+    <div class="form-group">
+        <label>Descrição:</label>
+        <input type="text" asp-for="Descricao" class="form-control" value="@vDescricao" />
+        <span class="text-danger" asp-validation-for="Descricao"></span>
+    </div>
+    <div class="form-group">
+        <label>Tipo:</label>
+        <select asp-for="Tipo" class="form-control">
+            @{ if (@vTipo == "D")
+                {
+                    <option value="R">Receita</option>
+                    <option value="D" selected>Despesa</option>
+                }
+                else
+                {
+                    <option value="R" selected>Receita</option>
+                    <option value="D">Despesa</option>
+                }
+            }
+
+        </select>
+        <span class="text-danger" asp-validation-for="Tipo"></span>
+    </div>
+    <button type="submit" class="btn btn-block btn-success">@labelSalvar</button>
+</form>

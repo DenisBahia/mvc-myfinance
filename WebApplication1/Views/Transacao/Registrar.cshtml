@@ -1,0 +1,108 @@
+﻿@model TransacaoModel
+
+<h3>Criar Transação</h3>
+
+@{
+    var vDescricao = "";
+    var vData = "";
+    var vTipo = "";
+    var labelSalvar = "Registrar";
+    var vId = 0;
+    var vValor = 0.0;
+    var vContaId = 0;
+    var vPlanoContaId = 0;
+
+    try
+    {
+        vDescricao = @ViewBag.Registro.Descricao.ToString();
+        vData = DateTime.Parse(ViewBag.Registro.Data.ToString()).ToString("yyyy-MM-dd");
+        vTipo = @ViewBag.Registro.Tipo.ToString();
+        vId = int.Parse(@ViewBag.Registro.id.ToString());
+        vContaId = int.Parse(@ViewBag.Registro.Conta_Id.ToString());
+        vPlanoContaId = int.Parse(@ViewBag.Registro.Plano_Contas_Id.ToString());
+        labelSalvar = "Atualizar";
+        vValor = double.Parse(@ViewBag.Registro.Valor.ToString());
+    }
+    catch (Exception ex)
+    {
+        Console.Write(ex);
+    }
+
+}
+
+<form asp-controller="Transacao" asp-action="Registrar">
+    <input type="hidden" value="@vId" asp-for="id" />
+    <div class="form-group">
+        <label>Data:</label>
+        <input type="date" asp-for="Data" class="form-control" value="@vData" />
+        <span class="text-danger" asp-validation-for="Data"></span>
+    </div>
+    <div class="form-group">
+        <label>Tipo:</label>
+        <select asp-for="Tipo" class="form-control">
+            @{ if (@vTipo == "D")
+                {
+                    <option value="R">Receita</option>
+                    <option value="D" selected>Despesa</option>
+                }
+                else
+                {
+                    <option value="R" selected>Receita</option>
+                    <option value="D">Despesa</option>
+                }
+            }
+
+        </select>
+        <span class="text-danger" asp-validation-for="Tipo"></span>
+    </div>
+    <div class="form-group">
+        <label>Valor:</label>
+        <input type="number" asp-for="Valor" class="form-control" value="@vValor" />
+        <span class="text-danger" asp-validation-for="Valor"></span>
+    </div>
+    <div class="form-group">
+        <label>Histórico:</label>
+        @Html.TextArea("Descricao", vDescricao, new { @class = "form-control" })
+        <span class="text-danger" asp-validation-for="Descricao"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Conta:</label>
+        <select asp-for="Conta_Id" class="form-control">
+            @{
+                foreach (ContaModel item in (List<ContaModel>)ViewBag.ListaContas)
+                {
+                    if (item.id.ToString() == vContaId.ToString())
+                    {
+                        <option value="@item.id" selected>@item.Nome</option>
+                    }
+                    else
+                    {
+                        <option value="@item.id">@item.Nome</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Plano de Conta:</label>
+        <select asp-for="Plano_Contas_Id" class="form-control">
+            @{
+                foreach (PlanoContaModel item in (List<PlanoContaModel>)ViewBag.ListaPlanoContas)
+                {
+                    if (item.id.ToString() == vPlanoContaId.ToString())
+                    {
+                        <option value="@item.id" selected>@item.Descricao</option>
+                    }
+                    else
+                    {
+                        <option value="@item.id" >@item.Descricao</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-block btn-success">@labelSalvar</button>
+</form>

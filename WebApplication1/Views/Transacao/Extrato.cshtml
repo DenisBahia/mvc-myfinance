@@ -1,7 +1,92 @@
-﻿
-@{
-    ViewData["Title"] = "Extrato";
-}
+﻿@model TransacaoModel
 
-<h2>Extrato</h2>
+<h3>Extrato Financeiro</h3>
 
+<form asp-controller="Transacao" asp-action="Extrato">
+    <div class="form-group">
+        <label>Data Inicial:</label>
+        <input type="date" asp-for="Data" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Data Final:</label>
+        <input type="date" asp-for="DataFinal" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Tipo:</label>
+        <select asp-for="Tipo" class="form-control">
+            <option value="*" selected>Todos</option>
+            <option value="R">Receita</option>
+            <option value="D">Despesa</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Conta:</label>
+        <select asp-for="Conta_Id" class="form-control">
+            @{
+                foreach (ContaModel item in (List<ContaModel>)ViewBag.ListaContas)
+                {
+                    <option value="@item.id">@item.Nome</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-block btn-success" >Pesquisar</button>
+</form>
+
+<br />
+
+<h1>Saldo Inicial: @ViewBag.SaldoInicial</h1>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <td>Data</td>
+            <td>Tipo</td>
+            <td>Valor</td>
+            <td>Histórico</td>
+            <td>Conta</td>
+            <td>Plano de Contas</td>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @{
+
+            var vTotalDebitos = 0.0;
+            var vTotalCreditos = 0.0;
+            var vSaldoFinal = 0.0;
+
+            if (ViewBag.ListaTransacoes != null)
+            {
+                foreach (var item in (List<TransacaoModel>)ViewBag.ListaTransacoes)
+                {
+                    <tr>
+                        <td>@item.Data.ToString()</td>
+                        <td>@item.Tipo.ToString().Replace("D", "Despesa").Replace("R", "Receita")</td>
+                        <td>@item.Valor.ToString()</td>
+                        <td>@item.Descricao.ToString()</td>
+                        <td>@item.Conta_Nome.ToString()</td>
+                        <td>@item.Plano_Contas_Nome.ToString()</td>
+                    </tr>
+                    if (item.Tipo.ToString() == "D")
+                    {
+                        vTotalCreditos -= @item.Valor;
+                    }
+                    else
+                    {
+                        vTotalCreditos += @item.Valor;
+                    }
+                }
+            }
+
+            vSaldoFinal = ViewBag.SaldoInicial + vTotalCreditos - vTotalDebitos;
+
+        }
+
+    </tbody>
+
+</table>
+
+<h1>Saldo: @vSaldoFinal</h1>

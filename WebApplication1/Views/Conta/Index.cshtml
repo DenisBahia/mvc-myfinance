@@ -23,7 +23,7 @@
             {
                 <tr>
                     <td>
-                        <button type="button" class="btn btn-danger">Excluir</button>
+                        <button type="button" class="btn btn-danger" onclick="Excluir(@item.id.ToString())">Excluir</button>
                     </td>
                     <td>@item.id.ToString()</td>
                     <td>@item.Nome.ToString()</td>
@@ -36,3 +36,14 @@
 
 </table>
 
+<button type="button" class="btn btn-block btn-primary" onclick="CriarConta()">Criar Conta</button>
+
+<script language="javascript">
+    function CriarConta() {
+        window.location.href = "../Conta/CriarConta"
+    }
+
+    function Excluir(id) {
+        window.location.href = "../Conta/ExcluirConta/" + id
+    }
+</script>

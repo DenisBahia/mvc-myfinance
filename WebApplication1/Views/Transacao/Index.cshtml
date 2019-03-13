@@ -1,7 +1,57 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
+﻿<h2>Minhas Transações</h2>
 
-<h2>Index</h2>
+<table class="table table-bordered">
 
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>id</td>
+            <td>Data</td>
+            <td>Tipo</td>
+            <td>Valor</td>
+            <td>Histórico</td>
+            <td>Conta</td>
+            <td>Plano de Contas</td>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @{
+            foreach (var item in (List<TransacaoModel>)ViewBag.ListaTransacoes)
+            {
+        <tr>
+            <td>
+                <button type="button" class="btn btn-primary" onclick="Editar(@item.id.ToString())">Editar</button>
+                <button type="button" class="btn btn-danger" onclick="Excluir(@item.id.ToString())">Excluir</button>
+            </td>
+            <td>@item.id.ToString()</td>
+            <td>@item.Data.ToString()</td>
+            <td>@item.Tipo.ToString().Replace("D", "Despesa").Replace("R", "Receita")</td>
+            <td>@item.Valor.ToString()</td>
+            <td>@item.Descricao.ToString()</td>
+            <td>@item.Conta_Nome.ToString()</td>
+            <td>@item.Plano_Contas_Nome.ToString()</td>
+        </tr>
+            }
+        }
+
+    </tbody>
+
+</table>
+
+<button type="button" class="btn btn-block btn-primary" onclick="CriarTransacao()">Criar Transação</button>
+
+<script language="javascript">
+    function CriarTransacao() {
+        window.location.href = "../Transacao/Registrar"
+    }
+
+    function Excluir(id) {
+        window.location.href = "../Transacao/ExcluirTransacao/" + id
+    }
+
+    function Editar(id) {
+        window.location.href = "../Transacao/Registrar/" + id
+    }
+</script>
